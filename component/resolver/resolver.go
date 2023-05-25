@@ -70,7 +70,8 @@ func LookupIPv4(ctx context.Context, host string) ([]net.IP, error) {
 	ipAddrs, err := net.DefaultResolver.LookupIP(ctx, "ip4", host)
 	if err != nil {
 		return nil, err
-	} else if len(ipAddrs) == 0 {
+	}
+	if len(ipAddrs) == 0 {
 		return nil, ErrIPNotFound
 	}
 
@@ -82,7 +83,8 @@ func ResolveIPv4(host string) (net.IP, error) {
 	ips, err := LookupIPv4(context.Background(), host)
 	if err != nil {
 		return nil, err
-	} else if len(ips) == 0 {
+	}
+	if len(ips) == 0 {
 		return nil, fmt.Errorf("%w: %s", ErrIPNotFound, host)
 	}
 	return ips[rand.Intn(len(ips))], nil
@@ -117,7 +119,8 @@ func LookupIPv6(ctx context.Context, host string) ([]net.IP, error) {
 	ipAddrs, err := net.DefaultResolver.LookupIP(ctx, "ip6", host)
 	if err != nil {
 		return nil, err
-	} else if len(ipAddrs) == 0 {
+	}
+	if len(ipAddrs) == 0 {
 		return nil, ErrIPNotFound
 	}
 
@@ -129,7 +132,8 @@ func ResolveIPv6(host string) (net.IP, error) {
 	ips, err := LookupIPv6(context.Background(), host)
 	if err != nil {
 		return nil, err
-	} else if len(ips) == 0 {
+	}
+	if len(ips) == 0 {
 		return nil, fmt.Errorf("%w: %s", ErrIPNotFound, host)
 	}
 	return ips[rand.Intn(len(ips))], nil
@@ -156,7 +160,8 @@ func LookupIPWithResolver(ctx context.Context, host string, r Resolver) ([]net.I
 	ips, err := net.DefaultResolver.LookupIP(ctx, "ip", host)
 	if err != nil {
 		return nil, err
-	} else if len(ips) == 0 {
+	}
+	if len(ips) == 0 {
 		return nil, ErrIPNotFound
 	}
 
@@ -173,7 +178,8 @@ func ResolveIP(host string) (net.IP, error) {
 	ips, err := LookupIP(context.Background(), host)
 	if err != nil {
 		return nil, err
-	} else if len(ips) == 0 {
+	}
+	if len(ips) == 0 {
 		return nil, fmt.Errorf("%w: %s", ErrIPNotFound, host)
 	}
 	return ips[rand.Intn(len(ips))], nil
