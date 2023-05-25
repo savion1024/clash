@@ -141,12 +141,10 @@ func LookupIPWithResolver(ctx context.Context, host string, r Resolver) ([]net.I
 		return []net.IP{node.Data.(net.IP)}, nil
 	}
 
-	if r != nil {
-		if DisableIPv6 {
-			return r.LookupIPv4(ctx, host)
-		}
+	if r != nil && !DisableIPv6 {
 		return r.LookupIP(ctx, host)
-	} else if DisableIPv6 {
+	}
+	if DisableIPv6 {
 		return LookupIPv4(ctx, host)
 	}
 
